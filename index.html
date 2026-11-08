@@ -7,19 +7,30 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Helvetica Neue', sans-serif; }
     body, html { height: 100%; overflow: hidden; background: #0b0b0b; }
+    
+    /* 3-Column Split Layout Configuration */
     .split-container { display: flex; height: 100vh; width: 100vw; transition: all 0.5s ease; }
     .split-side { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; cursor: pointer; transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); padding: 2rem; text-align: center; }
-    .split-side:hover { flex: 1.4; }
+    .split-side:hover { flex: 1.5; }
+    
     .dark-choice { background-color: #0b0b0b; color: #ffffff; border-right: 1px solid #222; }
     .dark-choice h1 span { color: #8a2be2; } 
-    .color-choice { background-color: #ffffff; color: #111111; }
+    
+    .color-choice { background-color: #ffffff; color: #111111; border-right: 1px solid #ddd; }
     .color-choice h1 span { color: #8a2be2; } 
-    .split-side h1 { font-size: 3.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; font-weight: 900; line-height: 1.1; z-index: 2; }
-    .split-side p { font-size: 1rem; opacity: 0.7; max-width: 340px; line-height: 1.6; z-index: 2; }
+    
+    .mockup-choice { background-color: #16161a; color: #ffffff; }
+    .mockup-choice h1 span { color: #8a2be2; }
+
+    .split-side h1 { font-size: 3.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; font-weight: 900; line-height: 1.1; z-index: 2; }
+    .split-side p { font-size: 1rem; opacity: 0.7; max-width: 280px; line-height: 1.6; z-index: 2; }
+    
     .center-logo-anchor { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; z-index: 5; pointer-events: none; filter: drop-shadow(0px 8px 24px rgba(0,0,0,0.5)); transition: opacity 0.4s ease; }
     .center-logo-anchor img { width: 100%; height: 100%; object-fit: contain; }
+    
     .portfolio-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; transform: translateY(100%); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); z-index: 10; }
     .portfolio-view.active { transform: translateY(0); }
+    
     .sidebar { width: 280px; height: 100%; padding: 3rem 2rem; display: flex; flex-direction: column; justify-content: space-between; z-index: 15; }
     .sidebar.theme-dark { background: #0b0b0b; color: #fff; border-right: 1px solid #222; }
     .sidebar.theme-color { background: #f4f4f6; color: #111; border-right: 1px solid #ddd; }
@@ -36,17 +47,19 @@
     .sidebar.theme-dark .filter-btn { color: #fff; }
     .sidebar.theme-color .filter-btn { color: #111; }
     .filter-btn.active, .filter-btn:hover { opacity: 1; transform: translateX(6px); color: #8a2be2 !important; }
+    
     .back-btn { background: none; border: none; font-size: 0.9rem; cursor: pointer; opacity: 0.6; text-decoration: underline; margin-top: auto; }
     .sidebar.theme-dark .back-btn { color: #fff; }
     .sidebar.theme-color .back-btn { color: #111; }
+    
     .gallery-container { flex: 1; height: 100%; overflow-y: auto; padding: 4rem 3rem; background: #111113; transition: background 0.4s; }
     .gallery-container.theme-color { background: #ffffff; }
+    
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
     .card { background: transparent; border-radius: 6px; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0; transform: translateY(30px); }
     .card.show { opacity: 1; transform: translateY(0); }
     .card:hover { transform: translateY(-8px); }
 
-    /* PRECISE UNFORMATTED POSTER BOUNDS ENGINE RULES */
     .card-img-wrapper { 
       width: 100%; 
       aspect-ratio: 3/4; 
@@ -81,6 +94,10 @@
       <h1>White<br>Side<span>.</span></h1>
       <p>Vibrant, saturated color explosions engineered to disrupt bright spaces.</p>
     </div>
+    <div class="split-side mockup-choice" onclick="enterPortfolio('mockup')">
+      <h1>Mockups<span>.</span></h1>
+      <p>Real-world dimensional design, structural placement templates, and layouts.</p>
+    </div>
   </div>
 
   <div class="portfolio-view" id="portfolioView">
@@ -92,20 +109,17 @@
         <div class="logo">Velvet<span>Rose</span></div>
       </div>
       
-          <div class="nav-buttons">
+      <div class="nav-buttons">
         <button class="filter-btn" id="btn-dark" onclick="setFilter('dark')">Dark Collection</button>
         <button class="filter-btn" id="btn-colorful" onclick="setFilter('colorful')">White Collection</button>
-        <form action="https://mail.google.com/?" method="GET" target="_blank" style="margin: 0; padding: 0;">
+        <button class="filter-btn" id="btn-mockup" onclick="setFilter('mockup')">Mockups</button>
+        <form action="https://google.com?" method="GET" target="_blank" style="margin: 0; padding: 0;">
           <input type="hidden" name="extsrc" value="mailto">
           <input type="hidden" name="url" value="mailto:velvetrose982@gmail.com">
           <button type="submit" class="filter-btn">Contact Me</button>
         </form>
       </div>
 
-
-
-
-      
       <button class="back-btn" onclick="exitPortfolio()">← Back to Split</button>
     </div>
     
@@ -120,43 +134,42 @@
         style: "dark",
         img: "Magazine.png" 
       },
-	  {
+      {
         style: "dark",
         img: "hollow.png" 
       },
-	  {
+      {
         style: "dark",
         img: "New Project (2).png" 
       },
-	        {
+      {
         style: "dark",
         img: "limit.png"
       },
-	        {
+      {
         style: "dark",
         img: "Cat ps.png"
       },
-	     {
+      {
         style: "dark",
         img: "girll.png"
       },
-	  {
+      {
         style: "colorful",
         img: "New Project (4).png"
       },
-	     {
+      {
         style: "colorful",
         img: "angel.png"
       },
-	        {
+      {
         style: "dark",
         img: "ramm.png"
       },
-	      {
+      {
         style: "dark",
         img: "alienated.jpg"
       },
-
       {
         style: "colorful",
         img: "pic.png"
@@ -164,13 +177,15 @@
       {
         style: "colorful",
         img: "carpe diem.png"
-		
       },
       {
         style: "colorful",
         img: "testsa.png"
-		
-		
+      },
+      // --- ADD YOUR NEW MOCKUP IMAGES RIGHT HERE ---
+      {
+        style: "mockup",
+        img: "https://unsplash.com"
       }
     ];
 
@@ -211,18 +226,23 @@
       const sidebar = document.getElementById('siteSidebar');
       const container = document.getElementById('galleryContainer');
       
+      document.getElementById('btn-dark').classList.remove('active');
+      document.getElementById('btn-colorful').classList.remove('active');
+      document.getElementById('btn-mockup').classList.remove('active');
+      
       if(style === 'dark') {
         sidebar.className = "sidebar theme-dark";
         container.className = "gallery-container theme-dark";
         document.getElementById('btn-dark').classList.add('active');
-        document.getElementById('btn-colorful').classList.remove('active');
-      } else {
+      } else if(style === 'colorful') {
         sidebar.className = "sidebar theme-color";
         container.className = "gallery-container theme-color";
         document.getElementById('btn-colorful').classList.add('active');
-        document.getElementById('btn-dark').classList.remove('active');
-      }
-
+      } else if(style === 'mockup') {
+        sidebar.className = "sidebar theme-dark";
+        container.className = "gallery-container theme-dark";
+        document.getElementById('btn-mockup').classList.add('active');
+	}
       const cards = document.querySelectorAll('.card');
       cards.forEach(card => {
         if (card.getAttribute('data-style') === style) {
