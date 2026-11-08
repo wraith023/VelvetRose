@@ -109,16 +109,18 @@
         <div class="logo">Velvet<span>Rose</span></div>
       </div>
       
+            <!-- Located inside the sidebar workspace menu (Lines 60-70) -->
       <div class="nav-buttons">
         <button class="filter-btn" id="btn-dark" onclick="setFilter('dark')">Dark Collection</button>
         <button class="filter-btn" id="btn-colorful" onclick="setFilter('colorful')">White Collection</button>
         <button class="filter-btn" id="btn-mockup" onclick="setFilter('mockup')">Mockups</button>
-        <form action="https://google.com?" method="GET" target="_blank" style="margin: 0; padding: 0;">
+        <form action="https://mail.google.com/?" method="GET" target="_blank" style="margin: 0; padding: 0; width: 100%;">
           <input type="hidden" name="extsrc" value="mailto">
           <input type="hidden" name="url" value="mailto:velvetrose982@gmail.com">
-          <button type="submit" class="filter-btn">Contact Me</button>
+          <button type="submit" class="filter-btn" style="text-align: left;">Contact Me</button>
         </form>
       </div>
+
 
       <button class="back-btn" onclick="exitPortfolio()">← Back to Split</button>
     </div>
@@ -157,6 +159,10 @@
       {
         style: "colorful",
         img: "New Project (4).png"
+      }, 
+      {
+        style: "mockup",
+        img: "mockup.png"
       },
       {
         style: "colorful",
@@ -193,7 +199,7 @@
       renderGalleryItems();
     });
 
-    function renderGalleryItems() {
+        function renderGalleryItems() {
       const grid = document.getElementById("portfolioGrid");
       grid.innerHTML = ""; 
       
@@ -210,6 +216,7 @@
         grid.appendChild(card);
       });
     }
+
 
     function enterPortfolio(styleType) {
       document.getElementById('portfolioView').classList.add('active');
