@@ -17,7 +17,6 @@
     .split-side h1 { font-size: 3.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; font-weight: 900; line-height: 1.1; z-index: 2; }
     .split-side p { font-size: 1rem; opacity: 0.7; max-width: 340px; line-height: 1.6; z-index: 2; }
     
-    /* LOGO LOCKED SECURELY TO THE BOTTOM AREA CLEARING THE TEXT GRID */
     .center-logo-anchor { position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%); width: 340px; height: 340px; z-index: 5; pointer-events: none; filter: drop-shadow(0px 8px 24px rgba(0,0,0,0.5)); transition: opacity 0.4s ease; }
     .center-logo-anchor img { width: 100%; height: 100%; object-fit: contain; }
     
@@ -98,7 +97,7 @@
         <button class="filter-btn" id="btn-dark" onclick="setFilter('dark')">Dark Collection</button>
         <button class="filter-btn" id="btn-colorful" onclick="setFilter('colorful')">White Collection</button>
         <button class="filter-btn" id="btn-mockup" onclick="setFilter('mockup')">Mockups</button>
-        <button class="filter-btn" style="text-align: left;" onclick="window.open('https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=velvetrose982@gmail.com', '_blank')">Contact Me</button>
+        <button class="filter-btn" style="text-align: left;" onclick="window.open('https://google.com', '_blank')">Contact Me</button>
       </div>
 
       <button class="back-btn" onclick="exitPortfolio()">← Back to Split</button>
@@ -206,7 +205,6 @@
       const sidebar = document.getElementById('siteSidebar');
       const container = document.getElementById('galleryContainer');
       
-      // Safe, un-interrupted reset logic profile tags
       document.getElementById('btn-dark').classList.remove('active');
       document.getElementById('btn-colorful').classList.remove('active');
       document.getElementById('btn-mockup').classList.remove('active');
